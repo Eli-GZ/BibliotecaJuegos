@@ -3,16 +3,13 @@ import Navegacion from "./plantilla/Navegacion";
 import ListadoVentas from "./venta/ListadoVentas";
 import AgregarVenta from "./venta/AgregarVenta";
 import EditarVenta from "./venta/EditarVenta";
-import VentasDelDia from "./venta/VentasDelDia";
-import Banner from "./plantilla/Banner";
 
 function App() {
 
   return (
     <BrowserRouter>
-      <div style={{ display: "flex" }}>
-        {/* Sidebar fijo */}
-        <Banner />
+      <div>
+        {/* Sidebar fijo */}       
         <Navegacion />
         <div style={{ flexGrow: 1 }}>
           <Routes>
@@ -21,8 +18,6 @@ function App() {
                 <ListadoVentas />
               }
             />
-
-
 
 
             <Route
