@@ -1,0 +1,19 @@
+body {
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-attachment: fixed;
+  min-height: 100;
+  margin: 0;
+  font-family: sans-serif;
+  position: relative;
+}
+
+.contenido-principal {
+  margin-top: 12vh;
+}
+
+.nav-text{
+  background-color: rgb(255, 208, 216);
+  color: black;
+}
