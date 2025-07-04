@@ -1,18 +1,7 @@
 package com.AppJuegos.controller;
 
-import com.AppJuegos.dto.ProductoCantidadDTO;
-import com.AppJuegos.dto.TotalVentaDTO;
-import com.AppJuegos.dto.VentaDTO;
-import com.AppJuegos.model.Cliente;
-import com.AppJuegos.model.Producto;
 import com.AppJuegos.model.Juego;
-import com.AppVenta.service.IClienteService;
-import com.AppVenta.service.IProductoService;
-import com.AppVenta.service.IVentaService;
-import java.time.LocalDate;
-import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
-import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -29,25 +18,25 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import com.AppJuegos.service.IJuegoService;
 
 @RestController
 @RequestMapping("juegos")
 @CrossOrigin(value = "http://localhost:3000")
-public class VentaController {
-    
+public class JuegoController {
+
     @Autowired
-    private IVentaService ventaServ;
+    private IJuegoService ventaServ;
 
 //ENDPOINT para crear una nueva venta
- @PostMapping("/ventas")
-public ResponseEntity<?> createVenta(@RequestBody VentaDTO ventaDTO) {   
+    @PostMapping("/ventas")
+    public ResponseEntity<?> createVenta(@RequestBody VentaDTO ventaDTO) {
 
-    return ResponseEntity.ok(null);
-}
+        return ResponseEntity.ok(null);
+    }
 
 //ENDPOINT para obtener todas las ventas
-
-@GetMapping("/ventas")
+    @GetMapping("/ventas")
     public List<Juego> getVentas() {
         return ventaServ.getVentas();
     }
