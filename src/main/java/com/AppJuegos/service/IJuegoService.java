@@ -6,19 +6,19 @@ import java.util.List;
 
 public interface IJuegoService {
 
-    //Traer todas las ventas
+    //Traer todos los juegos
     public List<Juego> getJuegos();
 
-    //Guardar una venta 
+    //Guardar una juego
     public void saveJuego(Juego juego);
 
-    //Borrar una venta
+    //Borrar un juego
     public void deleteJuego(Long id_juego);
 
-    //Encontrar una venta
+    //Encontrar un juego
     public Juego findJuego(Long id_juego);
 
-    //Editar una venta
+    //Editar un juego
     public void editJuego(Long id_juego, String nombre, String imagen, Plataforma unPlataforma);
 
 
