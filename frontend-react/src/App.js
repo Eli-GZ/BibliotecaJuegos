@@ -1,17 +1,17 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Navegacion from "./plantilla/Navegacion";
-import ListadoVentas from "./venta/ListadoVentas";
+import ListadoVentas from "./venta/ListadoJuegos";
 import AgregarVenta from "./venta/AgregarVenta";
 import EditarVenta from "./venta/EditarVenta";
+
 
 function App() {
 
   return (
-    <BrowserRouter>
-      <div>
-        {/* Sidebar fijo */}       
+    <BrowserRouter>    
+      <div>           
         <Navegacion />
-        <div style={{ flexGrow: 1 }}>
+        <div style={{ flexGrow: 1 }}>           
           <Routes>
             <Route path="/"
               element={

@@ -1,60 +1,44 @@
-const fila = document.querySelector('.contenedor-carousel');
-const peliculas = document.querySelectorAll('.pelicula');
+import { useState } from "react";
+import { useEffect } from "react";
 
-const flechaIzquierda = document.getElementById('flecha-izquierda');
-const flechaDerecha = document.getElementById('flecha-derecha');
+function Show() {
+  
 
-// ? ----- ----- Event Listener para la flecha derecha. ----- -----
-flechaDerecha.addEventListener('click', () => {
-	fila.scrollLeft += fila.offsetWidth;
-
-	const indicadorActivo = document.querySelector('.indicadores .activo');
-	if(indicadorActivo.nextSibling){
-		indicadorActivo.nextSibling.classList.add('activo');
-		indicadorActivo.classList.remove('activo');
-	}
-});
-
-// ? ----- ----- Event Listener para la flecha izquierda. ----- -----
-flechaIzquierda.addEventListener('click', () => {
-	fila.scrollLeft -= fila.offsetWidth;
-
-	const indicadorActivo = document.querySelector('.indicadores .activo');
-	if(indicadorActivo.previousSibling){
-		indicadorActivo.previousSibling.classList.add('activo');
-		indicadorActivo.classList.remove('activo');
-	}
-});
-
-// ? ----- ----- Paginacion ----- -----
-const numeroPaginas = Math.ceil(peliculas.length / 5);
-for(let i = 0; i < numeroPaginas; i++){
-	const indicador = document.createElement('button');
-
-	if(i === 0){
-		indicador.classList.add('activo');
-	}
-
-	document.querySelector('.indicadores').appendChild(indicador);
-	indicador.addEventListener('click', (e) => {
-		fila.scrollLeft = i * fila.offsetWidth;
-
-		document.querySelector('.indicadores .activo').classList.remove('activo');
-		e.target.classList.add('activo');
-	});
+  return (
+    <div>
+      <h1>Movies</h1>
+      {/* <div className="search-container">
+        <input
+          type="text"
+          placeholder="Search Movies..."
+          value={}
+          onChange={handleSearchChange}
+        />
+      </div> */}
+      {/* <div className="movie-list">
+        {loading ? (
+          <Vortex 
+            height={120}
+            width={120}
+            color="#12c2e9"
+            ariaLabel="puff-loading"
+          />
+        ) : filteredMovies.length > 0 ? (
+          filteredMovies.map((movie, i) => (
+            <Card
+              key={i}
+              title={movie.title}
+              imageUrl={movie.imageUrl}
+              year={movie.year}
+              imdbLink={movie.imdbLink}
+            />
+          ))
+        ) : (
+          <p>No movies found</p>
+        )}
+      </div> */}
+    </div>
+  );
 }
 
-// ? ----- ----- Hover ----- -----
-peliculas.forEach((pelicula) => {
-	pelicula.addEventListener('mouseenter', (e) => {
-		const elemento = e.currentTarget;
-		setTimeout(() => {
-			peliculas.forEach(pelicula => pelicula.classList.remove('hover'));
-			elemento.classList.add('hover');
-		}, 300);
-	});
-});
-
-fila.addEventListener('mouseleave', () => {
-	peliculas.forEach(pelicula => pelicula.classList.remove('hover'));
-});
+export default Show;

@@ -9,13 +9,13 @@ export default function Navegacion({ logueado, setLogueado }) {
   return (
     <header>
       <div className="contenedor">
-        <h2 className="logotipo">Bilbioteca Juegos</h2>
+        <h2 className="logotipo">Biblioteca Juegos</h2>
         <nav>
-          <a href="#" className="activo">Inicio</a>
-          <a href="#">Programas</a>
-          <a href="#">Películas</a>
-          <a href="#">Más Recientes</a>
-          <a href="#">Mi lista</a>
+          <a href="#" className="activo">Todos los juegos</a>
+          <a href="#">PSNetwork</a>
+          <a href="#">XBOX live</a>
+          <a href="#">PC</a>
+          <a href="#">Agregar juego</a>
         </nav>
       </div>
     </header>

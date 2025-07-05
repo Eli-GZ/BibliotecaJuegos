@@ -1,12 +1,11 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react'
-import { Link } from 'react-router-dom';
-import uno from "../assets/1.png";
 
-export default function ListadoVentas() {
-  const urlBase = "";
 
-  const [ventas, setVentas] = useState([]);
+export default function ListadoJuegos({imageUrl, title, imdbLink, year}) {
+  const urlBase = "http://localhost:8080/juegos/todos";
+
+  const [juegos, setVentas] = useState([]);
 
   useEffect(() => {
     cargarVentas();
@@ -14,7 +13,7 @@ export default function ListadoVentas() {
 
   const cargarVentas = async () => {
     const resultado = await axios.get(urlBase);
-    console.log("Resultado cargar ventas");
+    console.log("Resultado cargar juegos");
     console.log(resultado.data);
     setVentas(resultado.data);
   }
@@ -33,16 +32,15 @@ export default function ListadoVentas() {
   
   return (
     <main>
-      <div className="pelicula-principal">
-        <div className="contenedor">
-          <h3 className="titulo">Interestellar</h3>
-          <p className="descripcion">
-            Narra las aventuras de un grupo de exploradores que hacen uso de un agujero de gusano recientemente descubierto para superar las limitaciones de los viajes espaciales tripulados y vencer las inmensas distancias que tiene un viaje interestelar.
-          </p>
-          <button role="button" className="boton"><i className="fas fa-play"></i>Reproducir</button>
-          <button role="button" className="boton"><i className="fas fa-info-circle"></i>Más información</button>
+      <div className="card">
+        <img src="https://juegosdigitalesargentina.com/files/images/productos/1494699100-doom-ps4-cover-640x798.jpg" alt="" className="card-image"/>
+        <div className="card-content">
+            <h2 className="card-title">{title} ({year})</h2>
+             <a href={imdbLink} target="">View on IMDB</a>   
+             <button></button><button></button>
         </div>
-      </div>
+        
+    </div>
 
     
     </main>

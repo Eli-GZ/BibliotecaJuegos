@@ -47,76 +47,88 @@ header nav a.activo {
   color: #FFF;
 }
 
-/* ---- ----- ----- Pelicula Principal ----- ----- ----- */
-.pelicula-principal {
-  font-size: 16px;
-  min-height: 40.62em;
-  color: #fff;
-  background: linear-gradient(rgba(0, 0, 0, .50) 0%, rgba(0, 0, 0, .50) 100%), url(../src/assets/backdrop.jpg);
-  background-position: center center;
-  background-size: cover;
-  margin-bottom: 3.12em;
+/* Estilos para las tarjetas */
+.card {
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  padding: 16px;
+  text-align: center;
+  max-width: 200px;
+  margin: 16px;
+  background-color: #192734;
+  color: white;
+  transition: transform 0.2s;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+}
+
+.card-image {
+  width: 100%;
+  height: auto;
+  border-radius: 4px;
+}
+
+.card-title {
+  font-size: 1.2em;
+  margin-top: 8px;
+}
+
+.card-description,
+.card-genre,
+.card-rating,
+.card-year {
+  font-size: 0.9em;
+  color: #bbb;
+  margin: 4px 0;
+}
+
+.card-link {
+  display: inline-block;
+  margin-top: 8px;
+  color: #007BFF;
+  text-decoration: none;
+}
+.card-link:hover {
+  text-decoration: underline;
+}
+
+.movie-list {
   display: flex;
-  align-items: end;
+  flex-wrap: wrap;
+  justify-content: center;
+  padding: 16px;
+  gap: 16px;
 }
 
-.pelicula-principal .contenedor {
-  margin: 0 auto;
-  margin-bottom: 6.25em;
-}
-
-.pelicula-principal .titulo {
-  font-weight: 600;
-  font-size: 3.12em;
-  margin-bottom: 0.4em;
-}
-
-.pelicula-principal .descripcion {
-  font-weight: normal;
-  font-size: 1em;
-  line-height: 1.75em;
-  max-width: 50%;
-  margin-bottom: 1.25em;
-}
-
-.pelicula-principal .boton {
-  background: rgba(0, 0, 0, 0.5);
-  border: none;
-  border-radius: 0.31em;
-  padding: 0.93em 1.87em;
-  color: #fff;
-  margin-right: 1.25em;
-  cursor: pointer;
-  transition: .3s ease all;
-  font-size: 1.12em;
-}
-
-.pelicula-principal .boton:hover {
-  background: #fff;
-  color: #000;
-}
-
-.pelicula-principal .boton i {
-  margin-right: 1.25em;
-}
-
-/* ---- ----- ----- Media Queries ----- ----- ----- */
-@media screen and (max-width: 800px) {
-  header .logotipo {
-    margin-bottom: 10px;
-    font-size: 30px;
-  }
-
-  header .contenedor {
-    flex-direction: column;
-    text-align: center;
-  }
-
-  .pelicula-principal {
-    font-size: 14px;
-  }
-
-  .pelicula-principal .descripcion {
+/* Responsivo */
+@media (max-width: 600px) {
+  .card {
     max-width: 100%;
   }
+}
+
+.search-container {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+
+input[type="text"] {
+  width: 100%;
+  max-width: 400px;
+  padding: 10px;
+  margin: 20px 0;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  font-size: 1em;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  transition: border-color 0.3s ease;
+}
+
+input[type="text"]:focus {
+  border-color: #646cff;
+  outline: none;
+  box-shadow: 0 2px 4px rgba(100,108,366,0.5);
 }
