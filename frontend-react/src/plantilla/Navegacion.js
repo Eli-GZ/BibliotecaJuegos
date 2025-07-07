@@ -1,9 +1,6 @@
 
-import { useNavigate } from 'react-router-dom'
+export default function Navegacion() {
 
-
-export default function Navegacion({ logueado, setLogueado }) {
-  const navigate = useNavigate();
 
 
   return (
@@ -11,11 +8,11 @@ export default function Navegacion({ logueado, setLogueado }) {
       <div className="contenedor">
         <h2 className="logotipo">Biblioteca Juegos</h2>
         <nav>
-          <a href="#" className="activo">Todos los juegos</a>
-          <a href="#">PSNetwork</a>
-          <a href="#">XBOX live</a>
-          <a href="#">PC</a>
-          <a href="#">Agregar juego</a>
+          <a href="s" className="activo">Todos los juegos</a>
+          <a href="s">PSNetwork</a>
+          <a href="s">XBOX live</a>
+          <a href="s">PC</a>
+          <a href="s">Agregar juego</a>
         </nav>
       </div>
     </header>
