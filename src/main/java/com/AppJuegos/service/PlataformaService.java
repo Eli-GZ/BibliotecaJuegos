@@ -4,7 +4,9 @@ import com.AppJuegos.model.Plataforma;
 import com.AppJuegos.repository.IPlataformaRepository;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
+@Service
 public class PlataformaService implements IPlataformaService {
 
     @Autowired
@@ -36,8 +38,8 @@ public class PlataformaService implements IPlataformaService {
         Plataforma plat = this.findPlataforma(idPlat);
         plat.setNombrePlataforma(nombrePlataforma);
         plat.setVersion(version);
-        
-        this.savePlataforma(plat);      
+
+        this.savePlataforma(plat);
     }
 
 }

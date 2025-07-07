@@ -1,8 +1,8 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Navegacion from "./plantilla/Navegacion";
-import ListadoVentas from "./venta/ListadoJuegos";
-import AgregarVenta from "./venta/AgregarVenta";
+import AgregarJuego from "./venta/AgregarJuego";
 import EditarVenta from "./venta/EditarVenta";
+import ListadoJuegos from "./venta/ListadoJuegos";
 
 
 function App() {
@@ -15,27 +15,16 @@ function App() {
           <Routes>
             <Route path="/"
               element={
-                <ListadoVentas />
+                <ListadoJuegos />
               }
-            />
-
-
+            />          
             <Route
-              path="/lista/venta"
+              path="/agregar/juego"
               element={
-
-                <ListadoVentas />
-
+                <AgregarJuego />
               }
             />
-            <Route
-              path="/agregar/venta"
-              element={
 
-                <AgregarVenta />
-
-              }
-            />
             <Route
               path="/editar/venta/:codigo_venta"
               element={
@@ -44,12 +33,7 @@ function App() {
 
               }
             />
-            <Route
-              path="/inicio"
-              element={
-                <ListadoVentas />
-              }
-            />
+
           </Routes>
         </div>
       </div>

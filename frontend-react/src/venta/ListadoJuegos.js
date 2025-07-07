@@ -1,6 +1,7 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react'
-
+import edit from "../assets/edit-icon.png"
+import borrar from "../assets/borrar-icon.png"
 
 export default function ListadoJuegos() {
   const urlBase = "http://localhost:8080/juegos";
@@ -19,26 +20,34 @@ export default function ListadoJuegos() {
   }
 
 
-  // const eliminarVenta = async (id) => {
-  //   const confirmacion = window.confirm("¿Estás seguro de eliminar esta venta?");
-  //   if (confirmacion) {
-  //     await axios.delete(`${urlBase}/${id}`);
-  //     cargarVentas();
-  //     alert("La venta se eliminó correctamente");
-  //   }
-  // }
+  const eliminarJuego = async (id_juego) => {
+    const confirmacion = window.confirm("¿Estás seguro de eliminar este juego?");
+    if (confirmacion) {
+      await axios.delete(`${urlBase}/${id_juego}`);
+      cargarJuegos();
+      alert("La venta se eliminó correctamente");
+    }
+  }
 
 
   return (
-    <main>
+    <main style={{display:"flex"}}>
       {juegos?.map((juegos, indice) => (
         <div className="card" key={indice}>
           <img src={juegos.imagen} alt="" className="card-image" />
           <div className="card-content">
             <h2 className="card-title">{juegos.nombre}</h2>
-            <p>{juegos.unaPlataforma.version}</p>
-
-            <button></button><button></button>
+            <p>{juegos.unaPlataforma.version}</p>            
+            <button
+              // onClick={() => eliminarVenta(ventas.codigo_venta)}
+              className="btn btn-sm fs-5 ">
+              <img src={edit} alt=''></img>
+            </button>
+            <button
+               onClick={() => eliminarJuego(juegos.id_juego)}
+              className="btn btn-sm fs-5">
+              <img src={borrar} alt=''></img>
+            </button>
           </div>
         </div>
       ))}

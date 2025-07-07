@@ -46,7 +46,46 @@ header nav a:hover,
 header nav a.activo {
   color: #FFF;
 }
+main{
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  justify-content: start;
+}
+main .btn{
+ margin-top: 3vh;
+}
 
+.btn{
+background-color:transparent;
+border: none;
+margin: 1vh;
+cursor: pointer;}
+
+.btn img:hover{
+height:3vh;
+
+}
+
+
+.container{
+  text-align: center;
+  margin: auto;
+  display: block;
+  color: white;
+}
+.container label{
+  margin-bottom: 1vh;
+  text-align: center;
+  display: block;
+}
+.cont-title{
+  margin-top:5vh;
+  margin-bottom: 5vh;
+}
+.form-select{
+  margin-bottom: 3vh;
+}
 /* Estilos para las tarjetas */
 .card {
   border: 1px solid #ccc;
@@ -58,6 +97,7 @@ header nav a.activo {
   background-color: #192734;
   color: white;
   transition: transform 0.2s;
+ 
 }
 
 .card:hover {
@@ -66,41 +106,29 @@ header nav a.activo {
 
 .card-image {
   width: 100%;
-  height: auto;
+  height: 60%;
   border-radius: 4px;
+  object-fit: cover;
 }
 
 .card-title {
   font-size: 1.2em;
   margin-top: 8px;
 }
-
-.card-description,
-.card-genre,
-.card-rating,
-.card-year {
-  font-size: 0.9em;
-  color: #bbb;
-  margin: 4px 0;
+select{
+  height: 3vh;
+  background-color: transparent;
+  color: white;
+  border-radius: 5px;
+}
+option{
+  height: 3vh;
+  background-color: black;
+  color: white;
+  border-radius: 5px;
 }
 
-.card-link {
-  display: inline-block;
-  margin-top: 8px;
-  color: #007BFF;
-  text-decoration: none;
-}
-.card-link:hover {
-  text-decoration: underline;
-}
 
-.movie-list {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  padding: 16px;
-  gap: 16px;
-}
 
 /* Responsivo */
 @media (max-width: 600px) {
