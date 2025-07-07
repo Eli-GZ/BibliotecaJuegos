@@ -1,20 +1,21 @@
 import axios from 'axios';
-import React, { useEffect, useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import React, { useCallback, useEffect, useState } from 'react';
+import { Link, useNavigate, useParams } from 'react-router-dom';
 import back from "../assets/cancelar-icon.png"
 import save from "../assets/save-icon.png"
 
-export default function AgregarJuego() {
+export default function EditarJuego() {
   let Navegacion = useNavigate();
+
   const urlBase = "http://localhost:8080/juegos";
+  const { id_juego } = useParams();
 
   const [plataforma, setPlataformas] = useState([]);
-
 
   const [juegos, setJuegos] = useState({
     nombre: "",
     imagen: "",
-    unaPlataforma: []
+    unaPlataforma: null, 
   });
 
   useEffect(() => {
@@ -23,53 +24,45 @@ export default function AgregarJuego() {
       .catch(err => console.error("Error cargando plataformas", err));
   }, []);
 
+  const cargarjuego = useCallback(async () => {
+    const resultado = await axios.get(`${urlBase}/${id_juego}`)
+    setJuegos(resultado.data)
+  }, [id_juego, urlBase]);
+
+
   useEffect(() => {
-    axios.get(urlBase)
-      .then(res => setJuegos(res.data))
-      .catch(err => console.error("Error cargando juegos", err));
-  }, []);
+    cargarjuego();
+  }, [cargarjuego]);
 
   const onInputChange = (e) => {
     setJuegos({ ...juegos, [e.target.name]: e.target.value })
   }
 
-  // Cambio cliente seleccionado
-  const onPlataformaChange = (e) => {
-    const PlatSeleccionado = plataforma.find(
-      c => c.idPlat === parseInt(e.target.value)
-    );
-    setJuegos({ ...juegos, unaPlataforma: PlatSeleccionado || {} });
-  };
 
   const onSubmit = async (e) => {
     e.preventDefault();
+    const plataformaSeleccionada = plataforma.find(p => p.idPlat === parseInt(juegos.unaPlataforma));
 
-    if (!juegos.unaPlataforma?.idPlat) {
-      alert("Debe seleccionar un cliente.");
-      return;
-    }
-
-    const juegoAEnviar = {
-      nombre: juegos.nombre,
-      imagen: juegos.imagen,
-      unaPlataforma: { idPlat: juegos.unaPlataforma.idPlat }
+    const juegosActualizados = {
+      ...juegos,
+      unaPlataforma: plataformaSeleccionada || null
     };
 
     try {
-      await axios.post("http://localhost:8080/juegos", juegoAEnviar);
+      await axios.put(`${urlBase}/${id_juego}`, juegosActualizados);
+      alert("El producto se modificó correctamente");
       Navegacion("/");
     } catch (error) {
-      alert("No se pudo crear el juego: " + (error.response?.data || error.message));
+      alert("No se pudo actualizar la venta " + error.response?.data);
       console.error("Error:", error.response?.data || error.message);
     }
-  };
-
+  }
 
 
   return (
     <div className='container contenido-principal'>
       <div className=''>
-        <h3 className='cont-title'>Agregar Juego Nuevo</h3>
+        <h3 className='cont-title'>Editar Juego Nuevo</h3>
       </div>
 
       <div className="row justify-content-center">
@@ -90,8 +83,11 @@ export default function AgregarJuego() {
             <select
               className="form-select"
               required
-              value={juegos.unaPlataforma?.idPlat || ""}
-              onChange={onPlataformaChange}
+              value={juegos.unaPlataforma?.idPlat || juegos.unaPlataforma || ""}
+              onChange={(e) => {
+                const idSeleccionado = parseInt(e.target.value);
+                setJuegos({ ...juegos, unaPlataforma: idSeleccionado });
+              }}
             >
               <option value="">Seleccione una plataforma</option>
               {plataforma.map(plat => (

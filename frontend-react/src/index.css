@@ -46,46 +46,70 @@ header nav a:hover,
 header nav a.activo {
   color: #FFF;
 }
-main{
+
+main {
   display: flex;
   flex-wrap: wrap;
   gap: 0.4rem;
   justify-content: start;
 }
-main .btn{
- margin-top: 3vh;
+
+main .btn {
+  margin-top: 3vh;
 }
 
-.btn{
-background-color:transparent;
-border: none;
-margin: 1vh;
-cursor: pointer;}
-
-.btn img:hover{
-height:3vh;
-
+.btn {
+  background-color: transparent;
+  border: none;
+  margin: 1vh;
+  cursor: pointer;
 }
 
 
-.container{
+.btn1 {
+  background-color: transparent;
+  border: none;
+  margin: 1vh;
+  cursor: pointer;
+}
+
+.btn1 img:hover {
+  content: url('../src/assets/borrar-hover.png');
+}
+
+.btn2 {
+  background-color: transparent;
+  border: none;
+  margin: 1vh;
+  cursor: pointer;
+}
+
+.btn2 img:hover {
+  content: url('../src/assets/edit-hover.png');
+}
+
+.container {
   text-align: center;
   margin: auto;
   display: block;
   color: white;
 }
-.container label{
+
+.container label {
   margin-bottom: 1vh;
   text-align: center;
   display: block;
 }
-.cont-title{
-  margin-top:5vh;
+
+.cont-title {
+  margin-top: 5vh;
   margin-bottom: 5vh;
 }
-.form-select{
+
+.form-select {
   margin-bottom: 3vh;
 }
+
 /* Estilos para las tarjetas */
 .card {
   border: 1px solid #ccc;
@@ -97,7 +121,7 @@ height:3vh;
   background-color: #192734;
   color: white;
   transition: transform 0.2s;
- 
+
 }
 
 .card:hover {
@@ -106,7 +130,7 @@ height:3vh;
 
 .card-image {
   width: 100%;
-  height: 60%;
+  height: 65%;
   border-radius: 4px;
   object-fit: cover;
 }
@@ -115,13 +139,15 @@ height:3vh;
   font-size: 1.2em;
   margin-top: 8px;
 }
-select{
+
+select {
   height: 3vh;
   background-color: transparent;
   color: white;
   border-radius: 5px;
 }
-option{
+
+option {
   height: 3vh;
   background-color: black;
   color: white;
@@ -151,12 +177,12 @@ input[type="text"] {
   border-radius: 8px;
   border: 1px solid #ccc;
   font-size: 1em;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   transition: border-color 0.3s ease;
 }
 
 input[type="text"]:focus {
   border-color: #646cff;
   outline: none;
-  box-shadow: 0 2px 4px rgba(100,108,366,0.5);
+  box-shadow: 0 2px 4px rgba(100, 108, 366, 0.5);
 }

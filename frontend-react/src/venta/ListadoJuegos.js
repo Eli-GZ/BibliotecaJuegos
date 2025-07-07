@@ -2,6 +2,7 @@ import axios from 'axios';
 import React, { useEffect, useState } from 'react'
 import edit from "../assets/edit-icon.png"
 import borrar from "../assets/borrar-icon.png"
+import { Link } from 'react-router-dom';
 
 export default function ListadoJuegos() {
   const urlBase = "http://localhost:8080/juegos";
@@ -31,27 +32,27 @@ export default function ListadoJuegos() {
 
 
   return (
-    <main style={{display:"flex"}}>
+    <main style={{ display: "flex" }}>
       {juegos?.map((juegos, indice) => (
         <div className="card" key={indice}>
           <img src={juegos.imagen} alt="" className="card-image" />
           <div className="card-content">
             <h2 className="card-title">{juegos.nombre}</h2>
-            <p>{juegos.unaPlataforma.version}</p>            
-            <button
-              // onClick={() => eliminarVenta(ventas.codigo_venta)}
-              className="btn btn-sm fs-5 ">
+            <p>{juegos.unaPlataforma?.version || "Sin plataforma"}</p>
+
+            <Link to={`/editar/juego/${juegos.id_juego}`} className="btn2">
               <img src={edit} alt=''></img>
-            </button>
+            </Link>
             <button
-               onClick={() => eliminarJuego(juegos.id_juego)}
-              className="btn btn-sm fs-5">
+              onClick={() => eliminarJuego(juegos.id_juego)}
+              className="btn1">
               <img src={borrar} alt=''></img>
             </button>
           </div>
         </div>
-      ))}
-    </main>
+      ))
+      }
+    </main >
 
   )
 }
