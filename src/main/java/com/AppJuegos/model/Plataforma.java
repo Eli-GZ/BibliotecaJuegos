@@ -21,6 +21,6 @@ public class Plataforma {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long idPlat;
     private String nombrePlataforma;
-    private String consola;
+    private String version;
 
 }

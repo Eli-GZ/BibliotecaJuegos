@@ -7,19 +7,19 @@ import java.util.List;
 
 public interface IPlataformaService {
     
-    //Traer todas las ventas
+    //Traer todas las plataformas
     public List<Plataforma> getPlataformas();
 
-    //Guardar una venta 
+    //Guardar una Plataforma
     public void savePlataforma(Plataforma plat);
 
-    //Borrar una venta
+    //Borrar una Plataforma
     public void deletePlataforma(Long idPlat);
 
-    //Encontrar una venta
+    //Encontrar una Plataforma
     public Plataforma findPlataforma(Long idPlat);
 
-    //Editar una venta
-    public void editPlataforma(Long idPlat, String nombrePlataforma, String consola);
+    //Editar una Plataforma
+    public void editPlataforma(Long idPlat, String nombrePlataforma, String version);
 
 }

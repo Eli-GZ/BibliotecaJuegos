@@ -26,52 +26,30 @@ import com.AppJuegos.service.IJuegoService;
 public class JuegoController {
 
     @Autowired
-    private IJuegoService ventaServ;
+    private IJuegoService juegoServ;
 
-//ENDPOINT para crear una nueva venta
-    @PostMapping("/todos")
-    public ResponseEntity<?> createJuego(@RequestBody Juego juego) {
-
-        return ResponseEntity.ok(juego);
+    //ENDPOINT para obtener todos los juegos
+    @GetMapping("/juegos")
+    public List<Juego> getJuegos() {
+        return juegoServ.getJuegos();
     }
+
+    @GetMapping("/juegos/{id_juego}")
+    public Juego getJuego(@PathVariable Long id_juego) {       
+        return juegoServ.findJuego(id_juego);
+    }
+
+////ENDPOINT para crear una nueva venta
+//    @PostMapping("/todos")
+//    public ResponseEntity<?> createJuego(@RequestBody Juego juego) {
 //
-////ENDPOINT para obtener todas las ventas
-//    @GetMapping("/ventas")
-//    public List<Juego> getVentas() {
-//        return ventaServ.getVentas();
+//        return ResponseEntity.ok(juego);
 //    }
+//
+
 //
 ////ENDPOINT para obtener una venta
-//    @GetMapping("/ventas/{codigo_venta}")
-//    public ResponseEntity<?> getVenta(@PathVariable Long codigo_venta) {
-//        Juego ventaExistente = ventaServ.findVenta(codigo_venta);
-//        if (ventaExistente == null) {
-//            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Venta no encontrada");
-//        }
-//
-//        Map<Long, ProductoCantidadDTO> mapaProductos = new HashMap<>();
-//
-//        for (Producto p : ventaExistente.getListaProductos()) {
-//            ProductoCantidadDTO dto = mapaProductos.get(p.getCodigo_producto());
-//            if (dto == null) {
-//                dto = new ProductoCantidadDTO();
-//                dto.setCodigo_producto(p.getCodigo_producto());
-//                dto.setCantidad(1);
-//                mapaProductos.put(p.getCodigo_producto(), dto);
-//            } else {
-//                dto.setCantidad(dto.getCantidad() + 1);
-//            }
-//        }
-//
-//        VentaDTO respuesta = new VentaDTO();
-//        respuesta.setCodigo_venta(ventaExistente.getCodigo_venta());
-//        respuesta.setFecha_venta(ventaExistente.getFechaVenta()); // LocalDate aquí
-//        respuesta.setTotal(ventaExistente.getTotal());
-//        respuesta.setUnCliente(ventaExistente.getUnCliente());
-//        respuesta.setListaProductos(new ArrayList<>(mapaProductos.values()));
-//
-//        return ResponseEntity.ok(respuesta);
-//    }
+   
 //
 ////ENDPOINT para eliminar una venta
 //    @DeleteMapping("/ventas/{codigo_venta}")

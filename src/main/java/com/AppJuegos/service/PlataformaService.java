@@ -1,34 +1,43 @@
-
 package com.AppJuegos.service;
 
 import com.AppJuegos.model.Plataforma;
+import com.AppJuegos.repository.IPlataformaRepository;
 import java.util.List;
+import org.springframework.beans.factory.annotation.Autowired;
 
-public class PlataformaService implements IPlataformaService{
+public class PlataformaService implements IPlataformaService {
+
+    @Autowired
+    private IPlataformaRepository platRepo;
 
     @Override
     public List<Plataforma> getPlataformas() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        List<Plataforma> listaPlataformas = platRepo.findAll();
+        return listaPlataformas;
     }
 
     @Override
     public void savePlataforma(Plataforma plat) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        platRepo.save(plat);
     }
 
     @Override
     public void deletePlataforma(Long idPlat) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        platRepo.deleteById(idPlat);
     }
 
     @Override
     public Plataforma findPlataforma(Long idPlat) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        return platRepo.findById(idPlat).orElse(null);
     }
 
     @Override
-    public void editPlataforma(Long idPlat, String nombrePlataforma, String consola) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    public void editPlataforma(Long idPlat, String nombrePlataforma, String version) {
+        Plataforma plat = this.findPlataforma(idPlat);
+        plat.setNombrePlataforma(nombrePlataforma);
+        plat.setVersion(version);
+        
+        this.savePlataforma(plat);      
     }
-    
+
 }
