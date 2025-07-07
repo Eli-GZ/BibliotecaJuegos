@@ -36,12 +36,12 @@ public class JuegoService implements IJuegoService {
     }
 
     @Override
-    public void editJuego(Long id_juego, String nombre, String imagen, Plataforma unPlataforma) {
+    public void editJuego(Long id_juego, String nombre, String imagen, Plataforma unaPlataforma) {
 
         Juego jueg = this.findJuego(id_juego);
         jueg.setImagen(imagen);
         jueg.setNombre(nombre);
-        jueg.setUnPlataforma(unPlataforma);
+        jueg.setUnaPlataforma(unaPlataforma);
 
         this.saveJuego(jueg);
     }

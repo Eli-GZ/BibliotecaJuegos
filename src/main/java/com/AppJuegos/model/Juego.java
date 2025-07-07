@@ -26,6 +26,6 @@ public class Juego {
     
     @ManyToOne
     @JoinColumn(name = "customer_id")
-    private Plataforma unPlataforma;
+    private Plataforma unaPlataforma;
 
 }

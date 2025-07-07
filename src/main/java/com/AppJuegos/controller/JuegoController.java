@@ -1,6 +1,7 @@
 package com.AppJuegos.controller;
 
 import com.AppJuegos.model.Juego;
+import com.AppJuegos.model.Plataforma;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -19,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import com.AppJuegos.service.IJuegoService;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @RestController
 @RequestMapping("juegos")
@@ -69,63 +71,19 @@ public class JuegoController {
         }
     }
 
-
-//ENDPOINT para editar una venta
-
+//ENDPOINT para editar un Juego 
     @PutMapping("/juegos/{id_juego}")
-    public String editVenta(@PathVariable Long id_juego, @RequestBody VentaDTO ventaDTO) {
+    public ResponseEntity<Juego> actualizarJuego(@PathVariable Long id_juego, @RequestBody Juego juegoRecibido) {
 
-        // Buscar la venta original
-        Juego ventaExistente = ventaServ.findVenta(codigo_venta);
-        if (ventaExistente == null) {
-            return "** Error: Venta no encontrada **";
-        }
+        Juego juego = juegoServ.findJuego(id_juego);
 
-        //Obtener todos los productos   
-        List<Producto> totalProductos = produServ.getProductos();
+        juego.setNombre(juegoRecibido.getNombre());
+        juego.setImagen(juegoRecibido.getImagen());
+        juego.setUnaPlataforma(juegoRecibido.getUnaPlataforma());
 
-        //Obtener mapa id y producto
-        Map<Long, Producto> mapaProducto = totalProductos.stream()
-                .collect(Collectors.toMap(Producto::getCodigo_producto, p -> p));
+        juegoServ.saveJuego(juego);
 
-        //Construir la lista de productos respetando repeticiones
-        List<Producto> productosSeleccionados = new ArrayList<>();
-        double ventasTotales = 0.0;
-
-        for (ProductoCantidadDTO entrada : ventaDTO.getListaProductos()) {
-            Long idProducto = entrada.getCodigo_producto();
-            int cantidad = entrada.getCantidad();
-
-            Producto produ = mapaProducto.get(idProducto);
-            if (produ != null) {
-                for (int i = 0; i < cantidad; i++) {
-                    productosSeleccionados.add(produ);
-                    ventasTotales += produ.getCosto() != null ? produ.getCosto() : 0.0;
-                }
-            }
-        }
-
-        // Buscar el cliente
-        List<Cliente> todosLosClientes = clientServ.getClientes();
-        Cliente cliente = todosLosClientes.stream()
-                .filter(c -> c.getId_cliente().equals(ventaDTO.getId_cliente()))
-                .findFirst()
-                .orElse(null);
-
-        if (cliente == null || productosSeleccionados.isEmpty()) {
-            return " Error: Cliente o productos no encontrados";
-        }
-
-        // Actualizar los datos de la venta
-        ventaExistente.setFechaVenta(ventaDTO.getFecha_venta());
-        ventaExistente.setTotal(ventasTotales);
-        ventaExistente.setListaProductos(productosSeleccionados);
-        ventaExistente.setUnCliente(cliente);
-
-        // Guardar los cambios
-        ventaServ.saveVenta(ventaExistente);
-
-        return "La venta fue editada correctamente";
+        return ResponseEntity.ok(juego);
     }
 
 }

@@ -19,7 +19,7 @@ public interface IJuegoService {
     public Juego findJuego(Long id_juego);
 
     //Editar un juego
-    public void editJuego(Long id_juego, String nombre, String imagen, Plataforma unPlataforma);
+    public void editJuego(Long id_juego, String nombre, String imagen, Plataforma unaPlataforma);
 
 
 }
