@@ -28,99 +28,104 @@ public class JuegoController {
     @Autowired
     private IJuegoService juegoServ;
 
-    //ENDPOINT para obtener todos los juegos
+//ENDPOINT para obtener todos los juegos
     @GetMapping("/juegos")
-    public List<Juego> getJuegos() {
+    public List<Juego> traerJuegos() {
         return juegoServ.getJuegos();
     }
 
+//ENDPOINT para obtener un juego
     @GetMapping("/juegos/{id_juego}")
-    public Juego getJuego(@PathVariable Long id_juego) {       
+    public Juego traerJuego(@PathVariable Long id_juego) {
         return juegoServ.findJuego(id_juego);
     }
 
-////ENDPOINT para crear una nueva venta
-//    @PostMapping("/todos")
-//    public ResponseEntity<?> createJuego(@RequestBody Juego juego) {
-//
-//        return ResponseEntity.ok(juego);
-//    }
-//
+//ENDPOINT para crear un nuevo juego
+    @PostMapping("/juegos")
+    public String createJuego(@RequestBody Juego juego) {
+        Juego jueg = juego;
 
-//
-////ENDPOINT para obtener una venta
-   
-//
-////ENDPOINT para eliminar una venta
-//    @DeleteMapping("/ventas/{codigo_venta}")
-//    public String deleteVenta(@PathVariable Long codigo_venta) {
-//        //confirmar que existe un cliente        
-//        Juego vent = ventaServ.findVenta(codigo_venta);
-//
-//        if (vent != null) {
-//            ventaServ.deleteVenta(codigo_venta);
-//            //mensaje de eliminacion correcta
-//            return "La venta fue eliminada correctamente";
-//        } else {
-//            return "No se encontro el codigo de venta";
-//        }
-//    }
-////ENDPOINT para editar una venta
-//
-//    @PutMapping("/ventas/{codigo_venta}")
-//    public String editVenta(@PathVariable Long codigo_venta, @RequestBody VentaDTO ventaDTO) {
-//
-//        // Buscar la venta original
-//        Juego ventaExistente = ventaServ.findVenta(codigo_venta);
-//        if (ventaExistente == null) {
-//            return "** Error: Venta no encontrada **";
-//        }
-//
-//        //Obtener todos los productos   
-//        List<Producto> totalProductos = produServ.getProductos();
-//
-//        //Obtener mapa id y producto
-//        Map<Long, Producto> mapaProducto = totalProductos.stream()
-//                .collect(Collectors.toMap(Producto::getCodigo_producto, p -> p));
-//
-//        //Construir la lista de productos respetando repeticiones
-//        List<Producto> productosSeleccionados = new ArrayList<>();
-//        double ventasTotales = 0.0;
-//
-//        for (ProductoCantidadDTO entrada : ventaDTO.getListaProductos()) {
-//            Long idProducto = entrada.getCodigo_producto();
-//            int cantidad = entrada.getCantidad();
-//
-//            Producto produ = mapaProducto.get(idProducto);
-//            if (produ != null) {
-//                for (int i = 0; i < cantidad; i++) {
-//                    productosSeleccionados.add(produ);
-//                    ventasTotales += produ.getCosto() != null ? produ.getCosto() : 0.0;
-//                }
-//            }
-//        }
-//
-//        // Buscar el cliente
-//        List<Cliente> todosLosClientes = clientServ.getClientes();
-//        Cliente cliente = todosLosClientes.stream()
-//                .filter(c -> c.getId_cliente().equals(ventaDTO.getId_cliente()))
-//                .findFirst()
-//                .orElse(null);
-//
-//        if (cliente == null || productosSeleccionados.isEmpty()) {
-//            return " Error: Cliente o productos no encontrados";
-//        }
-//
-//        // Actualizar los datos de la venta
-//        ventaExistente.setFechaVenta(ventaDTO.getFecha_venta());
-//        ventaExistente.setTotal(ventasTotales);
-//        ventaExistente.setListaProductos(productosSeleccionados);
-//        ventaExistente.setUnCliente(cliente);
-//
-//        // Guardar los cambios
-//        ventaServ.saveVenta(ventaExistente);
-//
-//        return "La venta fue editada correctamente";
-//    }
+        if (jueg != null) {
+            juegoServ.saveJuego(juego);
+            return "La venta fue creada correctamente";
+
+        } else {
+            return "Ocurrio un error";
+        }
+    }
+
+//ENDPOINT para eliminar una venta
+    @DeleteMapping("/juegos/{id_juego}")
+    public String deleteJuego(@PathVariable Long id_juego) {
+        //confirmar que existe un cliente        
+        Juego jueg = juegoServ.findJuego(id_juego);
+
+        if (jueg != null) {
+            juegoServ.deleteJuego(id_juego);
+            //mensaje de eliminacion correcta
+            return "El juego fue eliminada correctamente";
+        } else {
+            return "No se encontro el id del juego";
+        }
+    }
+
+
+//ENDPOINT para editar una venta
+
+    @PutMapping("/juegos/{id_juego}")
+    public String editVenta(@PathVariable Long id_juego, @RequestBody VentaDTO ventaDTO) {
+
+        // Buscar la venta original
+        Juego ventaExistente = ventaServ.findVenta(codigo_venta);
+        if (ventaExistente == null) {
+            return "** Error: Venta no encontrada **";
+        }
+
+        //Obtener todos los productos   
+        List<Producto> totalProductos = produServ.getProductos();
+
+        //Obtener mapa id y producto
+        Map<Long, Producto> mapaProducto = totalProductos.stream()
+                .collect(Collectors.toMap(Producto::getCodigo_producto, p -> p));
+
+        //Construir la lista de productos respetando repeticiones
+        List<Producto> productosSeleccionados = new ArrayList<>();
+        double ventasTotales = 0.0;
+
+        for (ProductoCantidadDTO entrada : ventaDTO.getListaProductos()) {
+            Long idProducto = entrada.getCodigo_producto();
+            int cantidad = entrada.getCantidad();
+
+            Producto produ = mapaProducto.get(idProducto);
+            if (produ != null) {
+                for (int i = 0; i < cantidad; i++) {
+                    productosSeleccionados.add(produ);
+                    ventasTotales += produ.getCosto() != null ? produ.getCosto() : 0.0;
+                }
+            }
+        }
+
+        // Buscar el cliente
+        List<Cliente> todosLosClientes = clientServ.getClientes();
+        Cliente cliente = todosLosClientes.stream()
+                .filter(c -> c.getId_cliente().equals(ventaDTO.getId_cliente()))
+                .findFirst()
+                .orElse(null);
+
+        if (cliente == null || productosSeleccionados.isEmpty()) {
+            return " Error: Cliente o productos no encontrados";
+        }
+
+        // Actualizar los datos de la venta
+        ventaExistente.setFechaVenta(ventaDTO.getFecha_venta());
+        ventaExistente.setTotal(ventasTotales);
+        ventaExistente.setListaProductos(productosSeleccionados);
+        ventaExistente.setUnCliente(cliente);
+
+        // Guardar los cambios
+        ventaServ.saveVenta(ventaExistente);
+
+        return "La venta fue editada correctamente";
+    }
 
 }
