@@ -88,7 +88,6 @@ export default function EditarPC() {
               onChange={onInputChange}
             />
           </div>
-
           <div className="mb-3">
             <label htmlFor="imagen" className="form-label">URL de la imagen:</label>
             <input
