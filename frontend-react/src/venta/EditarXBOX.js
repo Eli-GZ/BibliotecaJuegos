@@ -1,81 +1,105 @@
 import axios from 'axios';
 import React, { useCallback, useEffect, useState } from 'react';
 import { Link, useNavigate, useParams } from 'react-router-dom';
-import back from "../assets/cancelar-icon.png"
-import save from "../assets/save-icon.png"
+import back from "../assets/cancelar-icon.png";
+import save from "../assets/save-icon.png";
 
-export default function EditarJuego() {
-  let Navegacion = useNavigate();
+export default function EditarXBOX() {
+  const navegacion = useNavigate();
 
   const urlBase = "http://localhost:8080/juegos";
   const { id_juego } = useParams();
 
-  const [plataforma, setPlataformas] = useState([]);
+  const [plataformas, setPlataformas] = useState([]);
 
-  const [juegos, setJuegos] = useState({
+  const [juego, setJuego] = useState({
     nombre: "",
     imagen: "",
-    unaPlataforma: null, 
+    unaPlataforma: null,
   });
 
+  const [idPlataformaSeleccionada, setIdPlataformaSeleccionada] = useState("");
+
+  // Cargar plataformas disponibles
   useEffect(() => {
     axios.get("http://localhost:8080/plataformas")
       .then(res => setPlataformas(res.data))
       .catch(err => console.error("Error cargando plataformas", err));
   }, []);
 
-  const cargarjuego = useCallback(async () => {
-    const resultado = await axios.get(`${urlBase}/${id_juego}`)
-    setJuegos(resultado.data)
+  // Cargar datos del juego a editar
+  const cargarJuego = useCallback(async () => {
+    try {
+      const resultado = await axios.get(`${urlBase}/${id_juego}`);
+      setJuego(resultado.data);
+      setIdPlataformaSeleccionada(resultado.data.unaPlataforma?.idPlat?.toString() || "");
+    } catch (error) {
+      console.error("Error cargando juego:", error);
+    }
   }, [id_juego, urlBase]);
 
-
   useEffect(() => {
-    cargarjuego();
-  }, [cargarjuego]);
+    cargarJuego();
+  }, [cargarJuego]);
 
+  // Manejar cambios en inputs nombre e imagen
   const onInputChange = (e) => {
-    setJuegos({ ...juegos, [e.target.name]: e.target.value })
-  }
+    setJuego({ ...juego, [e.target.name]: e.target.value });
+  };
 
-
+  // Manejar submit del formulario
   const onSubmit = async (e) => {
     e.preventDefault();
-    const plataformaSeleccionada = plataforma.find(p => p.idPlat === parseInt(juegos.unaPlataforma));
 
-    const juegosActualizados = {
-      ...juegos,
-      unaPlataforma: plataformaSeleccionada || null
+    const plataformaSeleccionada = plataformas.find(
+      p => p.idPlat === parseInt(idPlataformaSeleccionada)
+    );
+
+    const juegoActualizado = {
+      ...juego,
+      unaPlataforma: plataformaSeleccionada || juego.unaPlataforma,
     };
 
     try {
-      await axios.put(`${urlBase}/${id_juego}`, juegosActualizados);
-      alert("El producto se modificó correctamente");
-      Navegacion("/");
+      await axios.put(`${urlBase}/${id_juego}`, juegoActualizado);
+      alert("El juego se modificó correctamente");
+      navegacion("/xbox");
     } catch (error) {
-      alert("No se pudo actualizar la venta " + error.response?.data);
+      alert("No se pudo actualizar el juego: " + error.response?.data || error.message);
       console.error("Error:", error.response?.data || error.message);
     }
-  }
-
+  };
 
   return (
     <div className='container contenido-principal'>
-      <div className=''>
-        <h3 className='cont-title'>Editar Juego Nuevo</h3>
-      </div>
+      <h3 className='cont-title'>Editar Juego</h3>
 
       <div className="row justify-content-center">
         <form className='col-md-6' onSubmit={onSubmit}>
           <div className="mb-3">
             <label htmlFor="nombre" className="form-label">Nombre:</label>
-            <input type="text" className="form-control " id="nombre" name="nombre"
-              required={true} value={juegos.nombre} onChange={(e) => onInputChange(e)} />
+            <input
+              type="text"
+              className="form-control"
+              id="nombre"
+              name="nombre"
+              required
+              value={juego.nombre || ""}
+              onChange={onInputChange}
+            />
           </div>
+
           <div className="mb-3">
-            <label htmlFor="imagen" className="form-label">Imagen:</label>
-            <input type="text" className="form-control" id="imagen" name="imagen"
-              required={true} value={juegos.imagen} onChange={(e) => onInputChange(e)} />
+            <label htmlFor="imagen" className="form-label">URL de la imagen:</label>
+            <input
+              type="text"
+              className="form-control"
+              id="imagen"
+              name="imagen"
+              required
+              value={juego.imagen || ""}
+              onChange={onInputChange}
+            />
           </div>
 
           <div className="mb-3">
@@ -83,25 +107,25 @@ export default function EditarJuego() {
             <select
               className="form-select"
               required
-              value={juegos.unaPlataforma?.idPlat || juegos.unaPlataforma || ""}
-              onChange={(e) => {
-                const idSeleccionado = parseInt(e.target.value);
-                setJuegos({ ...juegos, unaPlataforma: idSeleccionado });
-              }}
+              value={idPlataformaSeleccionada}
+              onChange={(e) => setIdPlataformaSeleccionada(e.target.value)}
             >
               <option value="">Seleccione una plataforma</option>
-              {plataforma.map(plat => (
-                <option key={plat.idPlat} value={plat.idPlat}>
+              {plataformas.map((plat) => (
+                <option key={plat.idPlat} value={plat.idPlat.toString()}>
                   {plat.version}
                 </option>
               ))}
             </select>
           </div>
 
-          {/* Botones */}
           <div className='text-center'>
-            <button type="submit" className="btn"><img src={save} alt=''></img></button>
-            <Link to='/' className='btn'><img src={back} alt=''></img></Link>
+            <button type="submit" className="btn">
+              <img src={save} alt='Guardar' />
+            </button>
+            <Link to='/xbox' className='btn'>
+              <img src={back} alt='Cancelar' />
+            </Link>
           </div>
         </form>
       </div>

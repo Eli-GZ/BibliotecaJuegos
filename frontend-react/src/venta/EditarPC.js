@@ -90,7 +90,7 @@ export default function EditarPC() {
           </div>
 
           <div className="mb-3">
-            <label htmlFor="imagen" className="form-label">Imagen:</label>
+            <label htmlFor="imagen" className="form-label">URL de la imagen:</label>
             <input
               type="text"
               className="form-control"

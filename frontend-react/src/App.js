@@ -8,6 +8,7 @@ import ListadoPSN from "./venta/ListadoPSN";
 import ListadoXBOX from "./venta/ListadoXBOX";
 import EditarPC from "./venta/EditarPC";
 import EditarPSN from "./venta/EditarPSN";
+import EditarXBOX from "./venta/EditarXBOX";
 
 
 function App() {
@@ -51,10 +52,16 @@ function App() {
                 <ListadoPSN />
               }
             />
-              <Route
+             <Route
               path="/editar/psn/:id_juego"
               element={
                 <EditarPSN />
+              }
+            />
+              <Route
+              path="/editar/xbox/:id_juego"
+              element={
+                <EditarXBOX />
               }
             />
             <Route path="/xbox"

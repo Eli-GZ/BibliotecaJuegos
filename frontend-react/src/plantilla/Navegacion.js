@@ -13,10 +13,10 @@ export default function Navegacion() {
         PC
       </NavLink>
       <NavLink to="/xbox" className={({ isActive }) => isActive ? "activo" : ""}>
-        XBOX live
+        XBOX
       </NavLink>
       <NavLink to="/psn" className={({ isActive }) => isActive ? "activo" : ""}>
-        PSNetwork
+        PSN
       </NavLink>
       <NavLink to="/agregar/juego" className={({ isActive }) => isActive ? "activo" : ""}>
         Agregar juego

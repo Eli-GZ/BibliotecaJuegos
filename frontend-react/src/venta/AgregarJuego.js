@@ -80,7 +80,7 @@ export default function AgregarJuego() {
               required={true} value={juegos.nombre} onChange={(e) => onInputChange(e)} />
           </div>
           <div className="mb-3">
-            <label htmlFor="imagen" className="form-label">Imagen:</label>
+            <label htmlFor="imagen" className="form-label">URL de la imagen:</label>
             <input type="text" className="form-control" id="imagen" name="imagen"
               required={true} value={juegos.imagen} onChange={(e) => onInputChange(e)} />
           </div>

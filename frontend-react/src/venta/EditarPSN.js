@@ -4,7 +4,7 @@ import { Link, useNavigate, useParams } from 'react-router-dom';
 import back from "../assets/cancelar-icon.png";
 import save from "../assets/save-icon.png";
 
-export default function EditarPSN() {
+export default function EditarPC() {
   const navegacion = useNavigate();
 
   const urlBase = "http://localhost:8080/juegos";
@@ -90,7 +90,7 @@ export default function EditarPSN() {
           </div>
 
           <div className="mb-3">
-            <label htmlFor="imagen" className="form-label">Imagen:</label>
+            <label htmlFor="imagen" className="form-label">URL de la imagen:</label>
             <input
               type="text"
               className="form-control"

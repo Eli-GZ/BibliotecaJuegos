@@ -61,15 +61,29 @@ main .btn {
 .btn {
   background-color: transparent;
   border: none;
-  margin: 1vh;
-  cursor: pointer;
+ margin: 2vh;
 }
 
 
-.btn1 {
+.card-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  margin-top: 10px;
+}
+
+.card-buttons {
+  margin-top: auto;
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+}
+
+.btn1,
+.btn2 {
   background-color: transparent;
   border: none;
-  margin: 1vh;
   cursor: pointer;
 }
 
@@ -77,12 +91,7 @@ main .btn {
   content: url('../src/assets/borrar-hover.png');
 }
 
-.btn2 {
-  background-color: transparent;
-  border: none;
-  margin: 1vh;
-  cursor: pointer;
-}
+
 
 .btn2 img:hover {
   content: url('../src/assets/edit-hover.png');
@@ -112,31 +121,34 @@ main .btn {
 
 /* Estilos para las tarjetas */
 .card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 45vh;
+  width: 200px;
   border: 1px solid #ccc;
   border-radius: 8px;
-  padding: 16px;
-  text-align: center;
-  max-width: 200px;
+  padding: 12px;
   margin: 16px;
   background-color: #192734;
   color: white;
   transition: transform 0.2s;
-
+  text-align: center;
 }
-
 .card:hover {
   transform: translateY(-5px);
 }
 
 .card-image {
-  width: 100%;
-  height: 65%;
-  border-radius: 4px;
+ width: 100%;
+  height: 250px;
   object-fit: cover;
+  border-radius: 4px;
 }
 
-.card-title {
-  font-size: 1.2em;
+.card-title {  
+  font-size: 100%;
   margin-top: 8px;
 }
 

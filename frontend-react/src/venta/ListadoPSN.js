@@ -34,25 +34,29 @@ export default function ListadoPSN() {
   return (
     <main style={{ display: "flex" }}>
       {juegos.filter(j => j.unaPlataforma?.nombrePlataforma === "PlayStation")
-      .map((juegos, indice) => (
-        <div className="card" key={indice}>
-          <img src={juegos.imagen} alt="" className="card-image" />
-          <div className="card-content">
-            <h2 className="card-title">{juegos.nombre}</h2>
-            <p>{juegos.unaPlataforma?.version || "Sin plataforma"}</p>
-
-            <Link to={`/editar/psn/${juegos.id_juego}`} className="btn2">
-              <img src={edit} alt=''></img>
-            </Link>
-            <button
-              onClick={() => eliminarJuego(juegos.id_juego)}
-              className="btn1">
-              <img src={borrar} alt=''></img>
-            </button>
+      .map((juego, indice) => (
+        juego && (
+          <div className="card" key={indice}>
+            <img src={juego.imagen} alt="" className="card-image" />
+            <div className="card-content">
+              <h2 className="card-title">{juego.nombre}</h2>
+              <p>{juego.unaPlataforma?.version || "Sin plataforma"}</p>
+            </div>
+            <div className="card-buttons">
+              <Link to={`/editar/psn/${juego.id_juego}`} className="btn2">
+                <img src={edit} alt="editar" />
+              </Link>
+              <button
+                onClick={() => eliminarJuego(juego.id_juego)}
+                className="btn1"
+              >
+                <img src={borrar} alt="borrar" />
+              </button>
+            </div>
           </div>
-        </div>
-      ))
-      }
+
+        )
+      ))}
     </main >
 
   )
