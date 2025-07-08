@@ -33,14 +33,15 @@ export default function ListadoPSN() {
 
   return (
     <main style={{ display: "flex" }}>
-      {juegos?.map((juegos, indice) => (
+      {juegos.filter(j => j.unaPlataforma?.nombrePlataforma === "PlayStation")
+      .map((juegos, indice) => (
         <div className="card" key={indice}>
           <img src={juegos.imagen} alt="" className="card-image" />
           <div className="card-content">
             <h2 className="card-title">{juegos.nombre}</h2>
             <p>{juegos.unaPlataforma?.version || "Sin plataforma"}</p>
 
-            <Link to={`/editar/juego/${juegos.id_juego}`} className="btn2">
+            <Link to={`/editar/psn/${juegos.id_juego}`} className="btn2">
               <img src={edit} alt=''></img>
             </Link>
             <button

@@ -4,7 +4,7 @@ import { Link, useNavigate, useParams } from 'react-router-dom';
 import back from "../assets/cancelar-icon.png";
 import save from "../assets/save-icon.png";
 
-export default function EditarJuego() {
+export default function EditarPC() {
   const navegacion = useNavigate();
 
   const urlBase = "http://localhost:8080/juegos";
@@ -51,12 +51,10 @@ export default function EditarJuego() {
   const onSubmit = async (e) => {
     e.preventDefault();
 
-    // Buscar la plataforma seleccionada en el array de plataformas
     const plataformaSeleccionada = plataformas.find(
       p => p.idPlat === parseInt(idPlataformaSeleccionada)
     );
 
-    // Construir objeto juego a enviar manteniendo plataforma actual si no se cambia
     const juegoActualizado = {
       ...juego,
       unaPlataforma: plataformaSeleccionada || juego.unaPlataforma,
@@ -65,7 +63,7 @@ export default function EditarJuego() {
     try {
       await axios.put(`${urlBase}/${id_juego}`, juegoActualizado);
       alert("El juego se modificó correctamente");
-      navegacion("/");
+      navegacion("/pc");
     } catch (error) {
       alert("No se pudo actualizar el juego: " + error.response?.data || error.message);
       console.error("Error:", error.response?.data || error.message);
@@ -125,7 +123,7 @@ export default function EditarJuego() {
             <button type="submit" className="btn">
               <img src={save} alt='Guardar' />
             </button>
-            <Link to='/' className='btn'>
+            <Link to='/pc' className='btn'>
               <img src={back} alt='Cancelar' />
             </Link>
           </div>

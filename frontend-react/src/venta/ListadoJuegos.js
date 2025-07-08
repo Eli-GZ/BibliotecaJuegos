@@ -33,25 +33,24 @@ export default function ListadoJuegos() {
 
   return (
     <main style={{ display: "flex" }}>
-      {juegos?.map((juegos, indice) => (
-        <div className="card" key={indice}>
-          <img src={juegos.imagen} alt="" className="card-image" />
-          <div className="card-content">
-            <h2 className="card-title">{juegos.nombre}</h2>
-            <p>{juegos.unaPlataforma?.version || "Sin plataforma"}</p>
+      {juegos?.map((juego, indice) => (
+        juego && (
+          <div className="card" key={indice}>
+            <img src={juego.imagen} alt="" className="card-image" />
+            <div className="card-content">
+              <h2 className="card-title">{juego.nombre}</h2>
+              <p>{juego?.unaPlataforma?.version || "Sin plataforma"}</p>
 
-            <Link to={`/editar/juego/${juegos.id_juego}`} className="btn2">
-              <img src={edit} alt=''></img>
-            </Link>
-            <button
-              onClick={() => eliminarJuego(juegos.id_juego)}
-              className="btn1">
-              <img src={borrar} alt=''></img>
-            </button>
+              <Link to={`/editar/juego/${juego.id_juego}`} className="btn2">
+                <img src={edit} alt='' />
+              </Link>
+              <button onClick={() => eliminarJuego(juego.id_juego)} className="btn1">
+                <img src={borrar} alt='' />
+              </button>
+            </div>
           </div>
-        </div>
-      ))
-      }
+        )
+      ))}
     </main >
 
   )
