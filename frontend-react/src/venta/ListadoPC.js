@@ -33,7 +33,9 @@ export default function ListadoJuegos() {
 
   return (
     <main style={{ display: "flex" }}>
-      {juegos.filter(j => j.unaPlataforma?.nombrePlataforma === "PC")
+      {[...juegos]
+      .sort((a, b) => a.nombre.localeCompare(b.nombre))
+      .filter(j => j.unaPlataforma?.nombrePlataforma === "PC")
       .map((juego, indice) => (
         juego && (
           <div className="card" key={indice}>

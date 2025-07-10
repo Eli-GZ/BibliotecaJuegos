@@ -33,7 +33,9 @@ export default function ListadoJuegos() {
 
   return (
     <main style={{ display: "flex" }}>
-      {juegos?.map((juego, indice) => (
+      {[...juegos]
+      // .sort((a, b) => a.nombre.localeCompare(b.nombre))
+      .map((juego, indice) => (
         juego && (
           <div className="card" key={indice}>
             <img src={juego.imagen} alt="" className="card-image" />

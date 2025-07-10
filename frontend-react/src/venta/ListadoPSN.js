@@ -33,7 +33,9 @@ export default function ListadoPSN() {
 
   return (
     <main style={{ display: "flex" }}>
-      {juegos.filter(j => j.unaPlataforma?.nombrePlataforma === "PlayStation")
+      {[...juegos]
+      .sort((a, b) => a.nombre.localeCompare(b.nombre))
+      .filter(j => j.unaPlataforma?.nombrePlataforma === "PlayStation")
       .map((juego, indice) => (
         juego && (
           <div className="card" key={indice}>

@@ -33,7 +33,9 @@ export default function ListadoXBOX() {
 
   return (
     <main style={{ display: "flex" }}>
-      {juegos.filter(j => j.unaPlataforma?.nombrePlataforma === "XBOX")
+      {[...juegos]
+      .sort((a, b) => a.nombre.localeCompare(b.nombre))
+      .filter(j => j.unaPlataforma?.nombrePlataforma === "XBOX")
       .map((juego, indice) => (
         juego && (
           <div className="card" key={indice}>
