@@ -38,6 +38,7 @@ export default function App() {
   const juegosFiltrados = juegos.filter(juego =>
     juego.nombre.toLowerCase().includes(filtro.toLowerCase())
   );
+  
   return (
     <BrowserRouter>
       <div>
