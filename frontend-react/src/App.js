@@ -1,27 +1,53 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Navegacion from "./plantilla/Navegacion";
-import AgregarJuego from "./venta/AgregarJuego";
-import EditarJuego from "./venta/EditarJuego";
-import ListadoJuegos from "./venta/ListadoJuegos";
-import ListadoPC from "./venta/ListadoPC";
-import ListadoPSN from "./venta/ListadoPSN";
-import ListadoXBOX from "./venta/ListadoXBOX";
-import EditarPC from "./venta/EditarPC";
-import EditarPSN from "./venta/EditarPSN";
-import EditarXBOX from "./venta/EditarXBOX";
+import AgregarJuego from "./juegos/AgregarJuego";
+import EditarJuego from "./juegos/EditarJuego";
+import ListadoJuegos from "./juegos/ListadoJuegos";
+import ListadoPC from "./juegos/ListadoPC";
+import ListadoPSN from "./juegos/ListadoPSN";
+import ListadoXBOX from "./juegos/ListadoXBOX";
+import EditarPC from "./juegos/EditarPC";
+import EditarPSN from "./juegos/EditarPSN";
+import EditarXBOX from "./juegos/EditarXBOX";
+import { useEffect, useState } from "react";
+import axios from "axios";
 
+export default function App() {
 
-function App() {
+  const [juegos, setJuegos] = useState([]);
+  const [filtro, setFiltro] = useState("");
 
+  useEffect(() => {
+    cargarJuegos();
+  }, []);
+
+  const cargarJuegos = async () => {
+    const res = await axios.get("http://localhost:8080/juegos");
+    setJuegos(res.data);
+  };
+
+  const eliminarJuego = async (id_juego) => {
+    const confirmacion = window.confirm("¿Estás seguro de eliminar este juego?");
+    if (confirmacion) {
+      await axios.delete(`http://localhost:8080/juegos/${id_juego}`);
+      await cargarJuegos();
+      alert("El juego se eliminó correctamente");
+    }
+  };
+
+  const juegosFiltrados = juegos.filter(juego =>
+    juego.nombre.toLowerCase().includes(filtro.toLowerCase())
+  );
   return (
     <BrowserRouter>
       <div>
-        <Navegacion />
+        <Navegacion setFiltro={setFiltro} />
         <div style={{ flexGrow: 1 }}>
           <Routes>
             <Route path="/"
               element={
-                <ListadoJuegos />
+                <ListadoJuegos juegos={juegosFiltrados}
+                  onEliminar={eliminarJuego} />
               }
             />
             <Route
@@ -38,7 +64,8 @@ function App() {
             />
             <Route path="/pc"
               element={
-                <ListadoPC />
+                <ListadoPC juegos={juegosFiltrados}
+                  onEliminar={eliminarJuego}/>
               }
             />
             <Route
@@ -49,16 +76,17 @@ function App() {
             />
             <Route path="/psn"
               element={
-                <ListadoPSN />
+                <ListadoPSN juegos={juegosFiltrados}
+                  onEliminar={eliminarJuego}/>
               }
             />
-             <Route
+            <Route
               path="/editar/psn/:id_juego"
               element={
                 <EditarPSN />
               }
             />
-              <Route
+            <Route
               path="/editar/xbox/:id_juego"
               element={
                 <EditarXBOX />
@@ -66,7 +94,8 @@ function App() {
             />
             <Route path="/xbox"
               element={
-                <ListadoXBOX />
+                <ListadoXBOX juegos={juegosFiltrados}
+                  onEliminar={eliminarJuego}/>
               }
             />
           </Routes>
@@ -76,4 +105,4 @@ function App() {
   );
 }
 
-export default App;
+

@@ -15,35 +15,53 @@ body {
 }
 
 .contenedor {
-  width: 90%;
+  width: 95%;
   margin: auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
 
 header {
   padding: 30px 0;
 }
 
-header .contenedor {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
 
-header .logotipo {
+.logotipo {
+  display: flex;
   font-family: 'Bebas Neue', cursive;
   font-weight: normal;
   color: var(--rojo);
   font-size: 40px;
 }
 
-header nav a {
-  color: #AAA;
-  text-decoration: none;
-  margin-right: 20px;
+.search {
+ width: 250px !important;
+  flex-shrink: 0;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  background-color: #141414;
+  color: white;
+  font-size: 14px;
+  padding: 8px;
 }
 
-header nav a:hover,
-header nav a.activo {
+nav {
+  display: flex;
+  align-items: center;
+  gap: 1px;
+  flex-wrap: nowrap;
+}
+
+nav a {
+  color: #AAA;
+  text-align: center;
+  text-decoration: none;
+  width: 8vh;
+}
+
+nav a:hover,
+nav a.activo {
   color: #FFF;
 }
 
@@ -61,7 +79,7 @@ main .btn {
 .btn {
   background-color: transparent;
   border: none;
- margin: 2vh;
+  margin: 2vh;
 }
 
 
@@ -119,7 +137,6 @@ main .btn {
   margin-bottom: 3vh;
 }
 
-/* Estilos para las tarjetas */
 .card {
   position: relative;
   display: flex;
@@ -136,18 +153,19 @@ main .btn {
   transition: transform 0.2s;
   text-align: center;
 }
+
 .card:hover {
   transform: translateY(-5px);
 }
 
 .card-image {
- width: 100%;
+  width: 100%;
   height: 250px;
   object-fit: cover;
   border-radius: 4px;
 }
 
-.card-title {  
+.card-title {
   font-size: 100%;
   margin-top: 8px;
 }
