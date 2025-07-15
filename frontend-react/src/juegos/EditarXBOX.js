@@ -4,7 +4,7 @@ import { Link, useNavigate, useParams } from 'react-router-dom';
 import back from "../assets/cancelar-icon.png";
 import save from "../assets/save-icon.png";
 
-export default function EditarXBOX() {
+export default function EditarXBOX({ recargarJuegos }) {
   const navegacion = useNavigate();
 
   const urlBase = "http://localhost:8080/juegos";
@@ -63,6 +63,7 @@ export default function EditarXBOX() {
     try {
       await axios.put(`${urlBase}/${id_juego}`, juegoActualizado);
       alert("El juego se modificó correctamente");
+      await recargarJuegos();
       navegacion("/xbox");
     } catch (error) {
       alert("No se pudo actualizar el juego: " + error.response?.data || error.message);

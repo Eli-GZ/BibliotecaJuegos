@@ -4,7 +4,7 @@ import { Link, useNavigate, useParams } from 'react-router-dom';
 import back from "../assets/cancelar-icon.png";
 import save from "../assets/save-icon.png";
 
-export default function EditarPC() {
+export default function EditarPC({ recargarJuegos }) {
   const navegacion = useNavigate();
 
   const urlBase = "http://localhost:8080/juegos";
@@ -63,6 +63,7 @@ export default function EditarPC() {
     try {
       await axios.put(`${urlBase}/${id_juego}`, juegoActualizado);
       alert("El juego se modificó correctamente");
+      await recargarJuegos();
       navegacion("/pc");
     } catch (error) {
       alert("No se pudo actualizar el juego: " + error.response?.data || error.message);

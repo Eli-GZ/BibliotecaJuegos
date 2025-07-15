@@ -4,7 +4,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import back from "../assets/cancelar-icon.png"
 import save from "../assets/save-icon.png"
 
-export default function AgregarJuego() {
+export default function AgregarJuego({ recargarJuegos }) {
   let Navegacion = useNavigate();
   const urlBase = "http://localhost:8080/juegos";
 
@@ -57,6 +57,7 @@ export default function AgregarJuego() {
 
     try {
       await axios.post("http://localhost:8080/juegos", juegoAEnviar);
+      await recargarJuegos();
       Navegacion("/");
     } catch (error) {
       alert("No se pudo crear el juego: " + (error.response?.data || error.message));
