@@ -15,7 +15,7 @@ body {
 }
 
 .contenedor {
-  width: 95%;
+  width: 98%;
   margin: auto;
   display: flex;
   align-items: center;
@@ -23,9 +23,16 @@ body {
 }
 
 header {
-  padding: 30px 0;
+  padding-top: 30px;
+  padding-bottom: 10px;
 }
 
+.dropbar {
+  width: 98%;
+  display: flex;
+  justify-content: space-between;
+  height: 2vh
+}
 
 .logotipo {
   display: flex;
@@ -36,7 +43,7 @@ header {
 }
 
 .search {
- width: 250px !important;
+  width: 250px !important;
   flex-shrink: 0;
   border-radius: 5px;
   border: 1px solid #ccc;
@@ -152,6 +159,20 @@ main .btn {
   color: white;
   transition: transform 0.2s;
   text-align: center;
+}
+
+.edit-card {
+  position: relative;
+  display: inline-block;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 31vh;
+  width: 200px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  padding: 12px;
+  padding-top: 0px;
 }
 
 .card:hover {

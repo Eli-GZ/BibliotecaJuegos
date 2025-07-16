@@ -88,7 +88,7 @@ export default function EditarXBOX({ recargarJuegos }) {
               value={juego.nombre || ""}
               onChange={onInputChange}
             />
-          </div>
+          </div>       
 
           <div className="mb-3">
             <label htmlFor="imagen" className="form-label">URL de la imagen:</label>
@@ -101,6 +101,10 @@ export default function EditarXBOX({ recargarJuegos }) {
               value={juego.imagen || ""}
               onChange={onInputChange}
             />
+          </div>
+            <div className="edit-card">
+               <p>Vista previa:</p>
+            <img src={juego.imagen} alt={juego.nombre} className='card-image' />
           </div>
 
           <div className="mb-3">

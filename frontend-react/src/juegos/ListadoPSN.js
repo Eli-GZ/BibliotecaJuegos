@@ -2,20 +2,40 @@
 import edit from "../assets/edit-icon.png"
 import borrar from "../assets/borrar-icon.png"
 import { Link } from 'react-router-dom';
+import { useState } from "react";
 
 export default function ListadoPSN({ juegos, onEliminar }) {
+  const [versionSeleccionada, setVersionSeleccionada] = useState("");
 
 
-
- const juegosFiltrados = [...juegos]
-    .sort((a, b) => a.nombre.localeCompare(b.nombre))
-    .filter(j => j.unaPlataforma?.nombrePlataforma === "PlayStation");
+  const juegosPSN = juegos.filter(
+    j => j.unaPlataforma?.nombrePlataforma === "PlayStation"
+  );
+  const juegosFiltrados = juegosPSN
+    .filter(j =>
+      versionSeleccionada === "" || j.unaPlataforma?.version === versionSeleccionada
+    )
+    .sort((a, b) => a.nombre.localeCompare(b.nombre));
 
 
   return (
-  <main style={{ display: "flex", flexWrap: "wrap", justifyContent: "center" }}>
-      <div style={{ width: "100%", display: "flex", justifyContent: "flex-end", paddingRight: "20px", marginBottom: "10px" }}>
+    <main style={{ display: "flex", flexWrap: "wrap", justifyContent: "center" }}>
+      <div className="dropbar">
         <p style={{ color: "white" }}>Todos los Juegos: {juegosFiltrados.length}</p>
+        <select
+          className="form-select"
+          value={versionSeleccionada}
+          onChange={(e) => setVersionSeleccionada(e.target.value)}
+        >
+          <option value="">Todas las Versiones</option>
+          {[...new Set(juegosPSN.map(j => j.unaPlataforma?.version))] 
+            .filter(Boolean)
+            .map(version => (
+              <option key={version} value={version}>
+                {version}
+              </option>
+            ))}
+        </select>
       </div>
       {juegosFiltrados.map((juego, indice) => (
         juego && (

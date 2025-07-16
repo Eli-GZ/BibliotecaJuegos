@@ -85,7 +85,12 @@ export default function AgregarJuego({ recargarJuegos }) {
             <input type="text" className="form-control" id="imagen" name="imagen"
               required={true} value={juegos.imagen} onChange={(e) => onInputChange(e)} />
           </div>
-
+          {juegos.imagen && juegos.imagen !== "null" && (
+            <div className="edit-card">
+              <p>Vista previa:</p>
+              <img src={juegos.imagen} alt={juegos.nombre} className='card-image' />
+            </div>
+          )}
           <div className="mb-3">
             <label className="form-label">Plataforma</label>
             <select

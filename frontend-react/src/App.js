@@ -12,6 +12,7 @@ import EditarXBOX from "./juegos/EditarXBOX";
 import { useEffect, useState } from "react";
 import axios from "axios";
 
+
 function AppContent() {
   const [juegos, setJuegos] = useState([]);
   const [filtro, setFiltro] = useState("");

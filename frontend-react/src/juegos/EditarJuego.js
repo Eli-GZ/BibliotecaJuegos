@@ -4,7 +4,7 @@ import { Link, useNavigate, useParams } from 'react-router-dom';
 import back from "../assets/cancelar-icon.png";
 import save from "../assets/save-icon.png";
 
-export default function EditarJuego({ recargarJuegos }) {
+export default function EditarJuego({ recargarJuegos}) {
   const navegacion = useNavigate();
 
   const urlBase = "http://localhost:8080/juegos";
@@ -90,7 +90,7 @@ export default function EditarJuego({ recargarJuegos }) {
             />
           </div>
 
-          <div className="mb-3">
+          <div>
             <label htmlFor="imagen" className="form-label">URL de la imagen:</label>
             <input
               type="text"
@@ -101,6 +101,10 @@ export default function EditarJuego({ recargarJuegos }) {
               value={juego.imagen || ""}
               onChange={onInputChange}
             />
+          </div> 
+          <div className="edit-card">
+             <p>Vista previa:</p>
+            <img src={juego.imagen} alt={juego.nombre} className='card-image'/>                   
           </div>
 
           <div className="mb-3">

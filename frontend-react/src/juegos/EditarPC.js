@@ -101,6 +101,10 @@ export default function EditarPC({ recargarJuegos }) {
               onChange={onInputChange}
             />
           </div>
+          <div className="edit-card">
+             <p>Vista previa:</p>
+            <img src={juego.imagen} alt={juego.nombre} className='card-image' />
+          </div>
 
           <div className="mb-3">
             <label className="form-label">Plataforma</label>

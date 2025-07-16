@@ -6,7 +6,7 @@ export default function ListadoJuegos({ juegos, onEliminar }) {
   
   return (
     <main style={{ display: "flex", flexWrap: "wrap", justifyContent: "center" }}>
-      <div style={{ width: "100%", display: "flex", justifyContent: "flex-end", paddingRight: "20px", marginBottom: "10px" }}>
+      <div className="dropbar">
         <p style={{ color: "white" }}>Todos los Juegos: {juegos.length}</p>
       </div>
 

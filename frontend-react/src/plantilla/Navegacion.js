@@ -9,7 +9,7 @@ export default function Navegacion({ filtro, setFiltro }) {
   return (
     <header>
       <div className="contenedor">
-        <h2 className="logotipo">Mega Biblioteca</h2>
+        <h2 className="logotipo">Mi Biblioteca</h2>
         <nav>
           <input
             className="search"
