@@ -6,6 +6,7 @@ import java.util.List;
 
 public interface IJuegoService {
 
+    
     //Traer todos los juegos
     public List<Juego> getJuegos();
 
