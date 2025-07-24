@@ -4,9 +4,7 @@ import com.AppJuegos.model.Juego;
 import com.AppJuegos.model.Plataforma;
 import java.util.List;
 
-public interface IJuegoService {
-
-    
+public interface IJuegoService {    
     //Traer todos los juegos
     public List<Juego> getJuegos();
 
